@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table( name = "espèces")
-public class Espece {
+public class Espece extends AbstractifAudit{
 
     public Long getId() {
         return id;
@@ -81,6 +81,7 @@ public class Espece {
     @JoinColumn(name = "user_id",
             referencedColumnName = "id")
     private User user;
+
 
 
 }

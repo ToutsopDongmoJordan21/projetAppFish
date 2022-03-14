@@ -16,9 +16,9 @@ public interface EspeceRepository extends JpaRepository<Espece, Long> {
 
     public List<Espece> findAllByCreatedBy(Long userId);
 
-    public Espece findByEspeceName(String especeName);
+    public List<Espece> findByEspeceName(String especeName);
 
-    public Espece findByEspeceFamily(String especeFamily);
+    public List<Espece> findByEspeceFamily(String especeFamily);
 
     public Espece findById(long id);
 

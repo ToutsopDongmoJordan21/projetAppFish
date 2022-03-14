@@ -26,7 +26,7 @@ public class EspeceResponseDto {
 
         private EspeceResponseDtoBuilder() {}
 
-        public static EspeceResponseDtoBuilder aEspeceResponseDtoBuilder() {
+        public static EspeceResponseDtoBuilder aEspeceResponseDto() {
             return new EspeceResponseDtoBuilder();
         }
 

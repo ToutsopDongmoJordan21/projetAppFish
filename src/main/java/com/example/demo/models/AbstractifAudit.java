@@ -37,4 +37,5 @@ public abstract class AbstractifAudit {
     /** The modified by. */
     @LastModifiedBy
     protected String modifiedBy = "SYSTEM";
+
 }

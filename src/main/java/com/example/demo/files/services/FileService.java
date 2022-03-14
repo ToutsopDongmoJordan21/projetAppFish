@@ -19,6 +19,9 @@ public interface FileService {
     public void deleteOneFile();
 
     public void deleteOneFile(String filename) throws IOException;
+
+    public List<FileDto> findEspeceFile(Long especeId);
+
     public FileDto findUserFile(Long userId);
 
 }

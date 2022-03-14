@@ -2,6 +2,7 @@ package com.example.demo.files.entities;
 
 import com.example.demo.files.entities.enumeration.DocType;
 import com.example.demo.files.entities.enumeration.FileType;
+import com.example.demo.models.Espece;
 import com.example.demo.models.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -31,6 +32,9 @@ public class AppFishFile implements Serializable {
     private FileType fileType;
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
+    private Espece espece;
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     public static final class AppFishFileBuilder {
@@ -40,6 +44,7 @@ public class AppFishFile implements Serializable {
         private String url;
         private DocType type;
         private FileType fileType;
+        private Espece espece;
         private User user;
 
         private AppFishFileBuilder() {
@@ -74,6 +79,11 @@ public class AppFishFile implements Serializable {
             return this;
         }
 
+        public AppFishFileBuilder withEspece(Espece espece) {
+            this.espece = espece;
+            return this;
+        }
+
         public AppFishFileBuilder withUser(User user) {
             this.user = user;
             return this;
@@ -86,6 +96,7 @@ public class AppFishFile implements Serializable {
             appFishFile.setUrl(url);
             appFishFile.setType(type);
             appFishFile.setFileType(fileType);
+            appFishFile.setEspece(espece);
             appFishFile.setUser(user);
             return appFishFile;
         }

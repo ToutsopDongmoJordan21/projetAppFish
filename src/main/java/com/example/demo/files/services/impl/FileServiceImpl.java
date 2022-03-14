@@ -8,6 +8,7 @@ import com.example.demo.files.repositories.FileRepository;
 import com.example.demo.files.services.FileService;
 import com.example.demo.files.webs.FileResource;
 import com.example.demo.models.User;
+import com.example.demo.repository.EspeceRepository;
 import com.example.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,8 @@ public class FileServiceImpl implements FileService {
     UserRepository userRepository;
     @Autowired
     FileRepository fileRepository;
+    @Autowired
+    EspeceRepository especeRepository;
 
     @Override
     public void init() {
@@ -115,6 +118,11 @@ public class FileServiceImpl implements FileService {
         fileRepository.delete(file);
         Path oldFile = root.resolve(filename);
         FileSystemUtils.deleteRecursively(oldFile);
+    }
+
+    @Override
+    public List<FileDto> findEspeceFile(Long especeId) {
+        return fileRepository.findByEspece(especeRepository.getOne(especeId)).stream().map(buildFileDtoCollection()).collect(Collectors.toList());
     }
 
 
