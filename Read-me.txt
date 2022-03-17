@@ -1,0 +1,12 @@
+I. Authentification des utilisateurs
+
+I.1 Code Back-end
+
+** Le controller de l'authentification de l'utulisateur se trouve dans le fichier demo/main/java/demo/controller/AuthController
+   -- Nous avons d'abord la premiére API ("api/auth/users") qui affiche tout les utilisateurs et ne prenrien en paramétres.
+   -- Ensuite nous avons la deuxiéme API ("api/auth/users/{id}") qui affiche un utilisateur en prenant comme paramétre son id;
+  cela nous serviras sur le front-end de telles façon que l'utilisateur puisse avoir access à ces informations.
+   -- Nous avons ensuite L'API qui permet supprimer un utilisateur en utilisant comme paramétre son id ("api/auth/users/{id}")
+   --Ensuite l'API qui permet qui permet qui permet de update les informations de l'utilisateur ayant comme paramétre l'id de 7
+  l'utilisateur. ("api/auth/users"/{id}).
+   --
