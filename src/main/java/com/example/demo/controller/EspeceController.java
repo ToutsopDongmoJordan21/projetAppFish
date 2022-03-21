@@ -6,7 +6,6 @@ import com.example.demo.models.dto.EspeceDto;
 import com.example.demo.models.dto.EspeceResponseDto;
 import com.example.demo.repository.EspeceRepository;
 import com.example.demo.service.EspeceDetailsService;
-import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

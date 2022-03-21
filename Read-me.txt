@@ -1,3 +1,35 @@
+Préequis:
+** Pour pouvoir lancer l'application on dois d'abord lancer la BD et insérer les role dans la classe role de la base de
+donnée, voici la requetes que l'on dois taper:
+
+#INSERT INTO roles(name) VALUES('ROLE_USER');
+#INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+#INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+** Ensuite l'on dois partis dans la represation des API du back-end (http://localhost:8080/swagger-ui.html) et taper les
+requêtes suivantes:
+
+# "username": "admin",
+# "email": "toto@gmail.com",
+# "password": "123456",
+# "phoneNumber": "699028439",
+# "role": ["admin"]
+
+#"username": "user1",
+#"email": "toto2@gmail.com",
+#"password": "1243456",
+#"phoneNumber": "6499028439",
+#"role": ["user"]
+
+#"username": "mod",
+#"email": "toto4@gmail.com",
+#"password": "mod123",
+#"phoneNumber": "679028439",
+#"role": ["mod"]
+
+Remarque: Un utilisateur ne peux pas avoir le même username ou le même address email ou le même phone number qu'un
+autre utilisateur! ou en d'autre terme un utilisateur ne peux pas avoir deux mêmes username ou phone number ou adresse email.
+
 I. Authentification des utilisateurs
 
 I.1 Code Back-end
@@ -7,6 +39,86 @@ I.1 Code Back-end
    -- Ensuite nous avons la deuxiéme API ("api/auth/users/{id}") qui affiche un utilisateur en prenant comme paramétre son id;
   cela nous serviras sur le front-end de telles façon que l'utilisateur puisse avoir access à ces informations.
    -- Nous avons ensuite L'API qui permet supprimer un utilisateur en utilisant comme paramétre son id ("api/auth/users/{id}")
-   --Ensuite l'API qui permet qui permet qui permet de update les informations de l'utilisateur ayant comme paramétre l'id de 7
+   -- Ensuite l'API qui permet qui permet qui permet de update les informations de l'utilisateur ayant comme paramétre l'id de 7
   l'utilisateur. ("api/auth/users"/{id}).
-   --
+   -- Nous avpns l'API du signin (login) c'est à dire la connexion de l'utilisateur a son compte!!  cela prend comme paramétre son
+  addresse email et son mots de passe. ("api/auth/signin"). ("api/auth/sigin").
+   -- Pour finir nous avons la derniére API; l'api du registration ou l'enregistrement d'un utilisateur, il prend en paramétre la sysntaxe
+  dessous:
+
+  # "username": "admin",
+  # "email": "toto@gmail.com",
+  # "password": "123456",
+  # "phoneNumber": "699028439",
+  # "role": ["admin"]
+
+  #"username": "user1",
+  #"email": "toto2@gmail.com",
+  #"password": "1243456",
+  #"phoneNumber": "6499028439",
+  #"role": ["user"]
+
+  Mais lors de l'implementation du front-end nous n'avons pas besoin de specifier le role de l'utulisateur car cela a déja configurer.
+  cela veux dire que tout utilisateur qui sera enregistrer dans le front aura le role de user. les autres roles pourront etre configurer par moi.
+  son api es ("api/auth/signup").
+
+
+
+  I.2 Code du front-end
+
+ ** Tout d'abord je vais t'envoyer le tutoriel qui m'as aidé à faire le code du back-end et il y'aussi son code pour le
+ front en Angular 8. mais je vais essayer de t'expliquer cela dans les lignes suivante avec des images.
+       --- https://www.bezkoder.com/spring-boot-login-example-mysql/   c'est le lien du back-end.
+       --- https://www.bezkoder.com/angular-jwt-authentication/
+
+ ** Tout d'abord je te conseils de regarder le tutorial plus haut ou tu fais des recherches par rapport pour etre mieux
+edifier sur la connexion spring/Angular 8.
+ ** Voici aussi le lien de mon application angular d'ou j'ai tiré tout mes screenshots.
+ (lien....)
+
+ ** Dans le fichier demo/uploads, j'ai mis certains screenshots du code front dont je vais te donner un petit aperçu.
+   -- Nous avons dans le fichier environment de Angular le baseUrl du back-end (environment.png et environment-prod.png).
+   -- Ensuite dans ton app-component tu dois inclure le role de chaque user avec leurs dashboard. Le app component prend
+  le user token and les informations de l'utilisateur chez Browser session storage via le token-storage service pour les
+  requêtes de signin and signup. (app-component.png, token-storage.png and token storage2.png).
+   -- Moi j'ai crée deux fichier; un fichier helpers qui contient mon auth-interceptor et un fichier service où je mets tout
+  les services de mon application.
+     -- Helpers: il contient la méthode intercept() qui inspecte et transforme le http request avant d'etre envoyer au serveur.
+     (auth-interceptor.png)
+     -- Service: nous avons le auth-service; ce service envois les requetes signup, le login http post au back-end.
+        (auth-service.png)
+        ---  token-storages-service: il manage le token du user and permet qu'il puisse accéder a ces informations. pour le logout
+        on dois seulement clear le session storage. (auth-interceptor.png).
+        --- user-service: Ce service donne les methodes pour accéder au ressource protégés; c'est à dire les API proprement dit de
+        chaque user. (auth-service).
+
+  -- Ensuite tu peux créer le component du registration. (register-component.png).
+  -- Puis le login-component: voir les images (login-component.png et login-component2.png).
+
+  pour la gestion de l'image de l'utilisateur, j'ai créer un service back-end et front-end qui gére cela
+  voir les images ci dessous:
+  -- Son component se trouve dans le fichier demo/src/main/java/com.example.demo/files.
+
+
+  II. Creation des espèces
+
+  -- Nous avons la premiére API (api/auth/especes) qui afficher tout les especes. Il ne prend rien comme paramétre.
+  -- Ensuite nous avons (api/auth/especes/userCreated/{id}) qui affiche les utilisateur qui ont eu à créer une espéce, elle prend
+  comme paramétre le id de l'utilisateur.
+  -- Ensuite nous avons (api/auth/especes/{id}) qui récupére une espéce celon son id; on peuc utiliser pour voir les details d'une
+  espéce.
+  -- L'API (api/auth/especes/especeName) fait la recherche d'une espèce celon le nom de l'espece. il prend comme paramétre le
+  nom de l'espèce.
+  -- L'API (api/auth/especes/especeFamily) a pour rôle de rechercher les espèces celon la famille de ces espèces. Il prend comme
+  paramétre la famille de l'espèce.
+  -- L'API (api/auth/especes/{id}) permet de supprimer un espece celon son id; il a comme paramétre le id de cette espèce.
+  -- L'API (api/auth/especes) permet d'insrer les espèces; il prend comme paramétre la famille de l'espèce, le nom de l'espèce et sa
+  description. Pour les images c'est un aautre service qui gére cela, et il es mapper avec l'image id pour pouvoir récupérer l'image
+  de l'espèce.
+  -- L'API (api/auth/especes/{id}) qui permet de update les espèces celon leurs id; il a comme paramétre le id de l'espèce et il update
+  le nom, la famille et la description de l'espèce.
+
+Les images ci dessus sont les captures d'ecran du controller de l'espece.
+(espece-controller1; espece-controller2; espece-controller3).
+
+
