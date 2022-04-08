@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**",
-                "/swagger-ui.html", "/webjars/**", "/api/file/download/**");
+                "/swagger-ui.html", "/webjars/**", "/api/file/download/**", "/favicon.ico", "/api/h2/**");
     }
 
     @Bean
@@ -63,9 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/payment/**").permitAll()
                 .antMatchers("/api/file/download/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/h2/**").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and().httpBasic();
 
